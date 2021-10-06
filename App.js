@@ -1,21 +1,45 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { View, Text, Button, StyleSheet } from "react-native";
 
-export default function App() {
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import HomePage from "./pages/HomePage";
+import CreateUser from "./pages/CreateUser";
+
+const Stack = createNativeStackNavigator();
+
+const MyStackNavigator = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Stack.Navigator initialRouteName="CreateUser">
+      <Stack.Screen
+        name="HomePage"
+        component={HomePage}
+        options={{
+          title: "Home Page",
+          headerStyle: { backgroundColor: "#7734ff" },
+          headerTintColor: "#ffffff",
+        }}
+      />
+      <Stack.Screen
+        name="CreateUser"
+        component={CreateUser}
+        options={{
+          title: "Create User",
+          headerStyle: { backgroundColor: "#7734ff" },
+          headerTintColor: "#ffffff",
+        }}
+      />
+    </Stack.Navigator>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const App = () => {
+  return (
+    <NavigationContainer>
+      <MyStackNavigator />
+    </NavigationContainer>
+  );
+};
+
+export default App;
